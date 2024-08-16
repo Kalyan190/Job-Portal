@@ -8,7 +8,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
-import { setLoading } from '@/Redux/authSlice'
+import { setLoading, setUser } from '@/Redux/authSlice'
 import { Loader2 } from 'lucide-react'
 
 const Login = () => {
@@ -23,6 +23,7 @@ const Login = () => {
       }
       const dispatch = useDispatch();
       const {loading} = useSelector(store=>store.auth)
+  
       
       
       const submitHandler = async (e)=>{
@@ -38,6 +39,7 @@ const Login = () => {
                   });
                   
                   if(res.data.success){
+                        dispatch(setUser(res.data.user));
                         navigate("/")
                         toast.success(res.data.message);
                   }
