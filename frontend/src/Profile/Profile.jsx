@@ -4,14 +4,21 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { Contact, Mail, Pen } from 'lucide-react'
-import React from 'react'
+import React, { useState } from 'react'
 import AppliedJobTable from './AppliedJobTable'
 import Footer from '@/components/Home/Footer'
+import UpdateDialogProfile from './UpdateDialogProfile'
+import { useSelector } from 'react-redux'
 
-const skills = ["Html","CSS","Javascript","Reactjs"]
+
+
+const isResume = true;
 
 const Profile = () => {
-      const isResume = true;
+      const [open,setOpen] = useState(false);
+      const {user} = useSelector(store=>store.auth);
+
+     
       return (
             <div>
                   <Navbar />
@@ -19,28 +26,28 @@ const Profile = () => {
                         <div className='flex gap-4 justify-between items-center'>
                               <div className='flex gap-4 items-center'>
                                     <Avatar className='cursor-pointer h-24 w-24'>
-                                          <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+                                          <AvatarImage src={user?.profile?.profilePhoto} alt="@shadcn" />
                                     </Avatar>
 
                                     <div>
-                                          <h1 className='text-xl font-medium'>Full Name</h1>
-                                          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Optio, atque.</p>
+                                          <h1 className='text-xl font-medium'>{user?.fullname}</h1>
+                                          <p>{user?.profile?.bio}</p>
                                     </div>
 
                               </div>
-                              <Button className="text-right" variant="outline"><Pen /></Button>
+                              <Button className="text-right" variant="outline" onClick={()=>setOpen(true)}><Pen /></Button>
                         </div>
                         <div className='my-4 '>
                               <div className='flex gap-2'><Mail />
-                                    <span>example@gmail.com</span></div>
+                                    <span>{user?.email}</span></div>
                               <div className='flex gap-2 my-2'> <Contact />
-                                    <span>1234-5678-10</span></div>
+                                    <span>{user?.phonenumber}</span></div>
                         </div>
                         <div className='my-5'>
                         <h1>Skills</h1>
                         <div className='flex gap-2 items-center mt-2'>
                                     {
-                                       skills.length !== 0? skills.map((item, index) => <Badge key={index}>{item}</Badge>):<span>NA</span>
+                                      user?.profile?.skills?.lengtth !== 0? user?.profile?.skills.map((item, index) => <Badge key={index}>{item}</Badge>):<span>NA</span>
                                     }
                         </div>
                         </div>
@@ -48,7 +55,7 @@ const Profile = () => {
                         <div className='grid max-w-sm items-center gap-1.5'>
                         <Label className="text-md font-bold">Resume</Label>
                         {
-                              isResume? <a target='blank' href='https://resume/kalyan@btech.com' className='text-blue-500 w-full hover:underline'>resume.kalyankumar.pdf</a>:<span>NA</span>
+                     isResume ? <a target='blank' href={user?.profile?.resume} className='text-blue-500 w-full hover:underline'>{user?.profile?.resumeOriginalName}</a>:<span>NA</span>
                         }
                         </div>
                        
@@ -59,6 +66,7 @@ const Profile = () => {
                         <h1 className='font-bold text-lg '>Applied Jobs</h1>
                         <AppliedJobTable />
                   </div>
+                  <UpdateDialogProfile open={open} setOpen={setOpen} />
 
                   <Footer />
 

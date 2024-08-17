@@ -1,12 +1,13 @@
 import { User } from "../models/user.model.js"
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
+import getDataUri from "../utils/dataurl.js";
+import cloudinary from "../utils/cloudinary.js";
 
 export const register = async(req,res) =>{
        try {
             const {fullname,email,phonenumber,password,role} = req.body;
 
-         
 
             if(!fullname || !email || !phonenumber || !password || !role){
                   return res.status(400).json({
@@ -14,6 +15,11 @@ export const register = async(req,res) =>{
                         success: false
                   })
             }
+            // cloudinary setup
+            const file = req.file;
+            const fileUri = getDataUri(file);
+            const cloudResponse = await cloudinary.uploader.upload(fileUri.content)
+
             const user = await User.findOne({email})
             if(user){
                   return res.status(400).json({
@@ -27,7 +33,10 @@ export const register = async(req,res) =>{
                   email,
                   phonenumber,
                   password:hashedPassword,
-                  role
+                  role,
+                  profile:{
+                     profilePhoto:cloudResponse.secure_url
+                  }
             })
 
             return res.status(201).json({
@@ -119,7 +128,7 @@ export const logout = async (req,res)=>{
 export const updateprofile = async (req,res)=>{
       try {
             const {fullname,email,phonenumber,bio,skills} = req.body;
-
+         
             // if(!fullname || !email || !phonenumber || !bio || !skills){
             //       return res.status(400).json({
             //             message:"something is missing",
@@ -133,8 +142,12 @@ export const updateprofile = async (req,res)=>{
             
             const userId = req.id;
             const file = req.file;
+             // cloudinary setup
+            const fileUri = getDataUri(file);
+            const cloudResponse = await cloudinary.uploader.upload(fileUri.content)
 
-            let user = await User.findOne(userId);
+
+            let user = await User.findById(userId);
 
             if(!user){
                   return res.status(400).json({
@@ -142,7 +155,7 @@ export const updateprofile = async (req,res)=>{
                         success:false
                   })
             }
-            // cloudnary file 
+          
 
 
             // update data
@@ -152,12 +165,11 @@ export const updateprofile = async (req,res)=>{
             if(bio) user.profile.bio = bio;
             if(skills)user.profile.skills = skillsArray;
             
-            
-            
-           
-            
-
             //resume update
+            if(cloudResponse){
+               user.profile.resume = cloudResponse.secure_url;
+               user.profile.resumeOriginalName = file.originalname;
+            }
 
            await user.save();
 
@@ -170,6 +182,7 @@ export const updateprofile = async (req,res)=>{
             profile:user.profile
 
           }
+         
           return res.status(200).json({
             message:"Profile updated successfully.",
             user,
