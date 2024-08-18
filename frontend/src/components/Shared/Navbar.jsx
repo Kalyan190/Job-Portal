@@ -29,6 +29,7 @@ const Navbar = () => {
          toast.error(error.response.data.message);
       }
    }
+   console.log(user);
 
 
    return (
