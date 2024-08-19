@@ -16,7 +16,7 @@ const useGetAllJobs = () => {
             }
          } catch (error) {
             console.log(error);
-            toast.error()
+            toast.error(error.response.data.message);
          }
       }
       fetchAllJobs();
