@@ -8,6 +8,7 @@ import { toast } from 'sonner'
 import axios from 'axios'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import useGetCompanyById from '@/hooks/useGetCompanyById'
 
 
 const CompanySetup = () => {
@@ -20,7 +21,7 @@ const CompanySetup = () => {
       file:null
 
    })
-
+   
    const {singleCompany} = useSelector(store=>store.company);
   
    
@@ -35,6 +36,7 @@ const CompanySetup = () => {
    }
    const params = useParams();
    const navigate = useNavigate();
+   useGetCompanyById(params.id);
    
    const submitHandler = async(e)=>{
       e.preventDefault();

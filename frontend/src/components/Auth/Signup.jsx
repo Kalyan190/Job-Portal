@@ -46,7 +46,6 @@ const Signup = () => {
             if(input.file){
                formData.append("file",input.file);
             }
-            console.log("form Data : " , formData);
             try {
                   dispatch(setLoading(true));
                   const res = await axios.post('/api/v1/users/register',formData,{
