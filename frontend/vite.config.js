@@ -11,7 +11,11 @@ export default defineConfig({
   },
   server: {
     proxy: {
-        '/api': 'https://job-portal-smoky-two.vercel.app',
+        '/api': {
+          target: 'https://job-portal-smoky-two.vercel.app',  // Replace with your backend server's URL
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api/, ''),
+        },
     },
   },
 })
