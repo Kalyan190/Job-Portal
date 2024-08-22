@@ -31,7 +31,7 @@ const Login = () => {
 
       try {
          dispatch(setLoading(true));
-         const res = await axios.post('/api/v1/users/login', input, {
+         const res = await axios.post(`/api/v1/users/login`, input, {
             headers: {
                "Content-Type": "application/json"
             },
