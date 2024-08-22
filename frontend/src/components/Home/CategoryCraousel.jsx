@@ -1,6 +1,9 @@
 import React from 'react'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '../ui/carousel'
 import { Button } from '../ui/button'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { setSearchQuery } from '@/Redux/jobSlice'
 
 
 const category = [
@@ -14,6 +17,13 @@ const category = [
 ]
 
 const CategoryCraousel = () => {
+   const navigate = useNavigate();
+   const dispatch = useDispatch();
+
+   const searchJobHandler = (query) => {
+      dispatch(setSearchQuery(query));
+      navigate('/browse');
+   }
       return (
             <div>
                   <Carousel className="w-full max-w-xl mx-auto my-16">
@@ -21,7 +31,7 @@ const CategoryCraousel = () => {
                         {
                               category.map((cat,index)=>(
                                     <CarouselItem className="md:basis-1/2 lg:basis-1/3" key={index}>
-                                   <Button className="rounded-full" variant="outline">{cat}</Button>
+                                   <Button onClick={()=>searchJobHandler(cat)} className="rounded-full" variant="outline">{cat}</Button>
                                     </CarouselItem>
                               ))
                         }

@@ -81,7 +81,7 @@ const Navbar = () => {
                               <h4 className='font-medium'>
                                  {user?.fullname}
                               </h4>
-                              <p className='text-sm text-muted-foreground'>{user?.bio} </p>
+                              <p className='text-sm text-muted-foreground'>{user?.profile?.bio} </p>
                            </div>
                         </div>
                         <div className='flex flex-col text-gray-600 my-2'>
