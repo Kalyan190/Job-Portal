@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { toast } from 'sonner'
+import { API } from '@/utils/constant'
 
 
 const useGetAllCompanies = () => {
@@ -10,7 +11,7 @@ const useGetAllCompanies = () => {
    useEffect(() => {
       const fetchAllCompanies = async () => {
          try {
-            const res = await axios.get('/api/v1/company/get', { withCredentials: true });
+            const res = await axios.get(`${API}/api/v1/company/get`, { withCredentials: true });
             if (res.data.success) {
                dispatch(setCompanies(res.data.companies))
             }

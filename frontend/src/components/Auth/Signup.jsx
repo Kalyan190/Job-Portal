@@ -10,6 +10,7 @@ import { toast } from 'sonner'
 import { useDispatch, useSelector } from 'react-redux'
 import { setLoading } from '@/Redux/authSlice'
 import { Loader2 } from 'lucide-react'
+import { API } from '@/utils/constant'
 
 
 const Signup = () => {
@@ -23,7 +24,7 @@ const Signup = () => {
             
 
       });
-
+      console.log("Api: --> ",API);
       const navigate = useNavigate()
 
       const changeEventHandler = (e)=>{
@@ -49,7 +50,7 @@ const Signup = () => {
             }
             try {
                   dispatch(setLoading(true));
-                  const res = await axios.post(`/api/v1/users/register`,formData,{
+                  const res = await axios.post(`${API}/api/v1/users/register`,formData,{
                         headers:{
                               "Content-Type":"multipart/form-data"
                         },

@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'sonner'
 import axios from 'axios'
 import { setUser } from '@/Redux/authSlice'
+import { API } from '@/utils/constant'
 
 const Navbar = () => {
 
@@ -17,7 +18,7 @@ const Navbar = () => {
 
    const logoutHandler = async () => {
       try {
-         const res = await axios.get('/api/v1/users/logout', { withCredentials: true });
+         const res = await axios.get(`${API}/api/v1/users/logout`, { withCredentials: true });
          if (res.data.success) {
             dispatch(setUser(null));
             navigate('/');

@@ -8,6 +8,7 @@ import { Loader2 } from 'lucide-react'
 import React, {  useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'sonner'
+import { API } from '@/utils/constant'
 
 const UpdateDialogProfile = ({ open, setOpen }) => {
    const [Loading, setLoading] = useState(false);
@@ -45,7 +46,7 @@ const UpdateDialogProfile = ({ open, setOpen }) => {
      console.log("update data: ",inputData);
      try {
          setLoading(true);
-        const res = await axios.post('/api/v1/users/profile/update', formData, {
+        const res = await axios.post(`${API}/api/v1/users/profile/update`, formData, {
            headers: {
               "Content-Type": "multipart/form-data"
            },

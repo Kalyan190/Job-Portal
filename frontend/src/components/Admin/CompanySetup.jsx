@@ -9,6 +9,7 @@ import axios from 'axios'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import useGetCompanyById from '@/hooks/useGetCompanyById'
+import { API } from '@/utils/constant'
 
 
 const CompanySetup = () => {
@@ -52,7 +53,7 @@ const CompanySetup = () => {
      
       try {
          setLoading(true);
-         const res = await axios.put(`/api/v1/company/update/${params.id}`,formData,{
+         const res = await axios.put(`${API}/api/v1/company/update/${params.id}`,formData,{
             headers:{
                'Content-Type':'multipart/form-data'
             },

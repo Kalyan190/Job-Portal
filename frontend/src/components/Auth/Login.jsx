@@ -10,6 +10,7 @@ import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { setLoading, setUser } from '@/Redux/authSlice'
 import { Loader2 } from 'lucide-react'
+import { API } from '@/utils/constant'
 
 const Login = () => {
    const [input, setInput] = useState({
@@ -31,7 +32,7 @@ const Login = () => {
 
       try {
          dispatch(setLoading(true));
-         const res = await axios.post(`/api/v1/users/login`, input, {
+         const res = await axios.post(`${API}/api/v1/users/login`, input, {
             headers: {
                "Content-Type": "application/json"
             },
@@ -40,13 +41,15 @@ const Login = () => {
 
          if (res.data.success) {
             dispatch(setUser(res.data.user));
+            console.log(res.data.token);
+            
             console.log(res.data.user);
             navigate("/")
             toast.success(res.data.message);
          }
       } catch (error) {
          console.log(error);
-         toast.error(error.response.data.message);
+         toast.error(error.response?.data?.message);
       } finally {
          dispatch(setLoading(false));
       }

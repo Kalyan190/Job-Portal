@@ -3,6 +3,7 @@ import axios from 'axios'
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { toast } from 'sonner'
+import { API } from '@/utils/constant'
 
 
 const useGetAppliedJob = () => {
@@ -10,7 +11,7 @@ const useGetAppliedJob = () => {
    useEffect(() => {
       const fetchAppliedJobs = async () => {
          try {
-            const res = await axios.get('/api/v1/application/get', { withCredentials: true });
+            const res = await axios.get(`${API}/api/v1/application/get`, { withCredentials: true });
             if (res.data.success) {
                dispatch(setAllAppliedJobs(res.data.application))
             }

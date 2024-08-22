@@ -9,8 +9,9 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVa
 import axios from 'axios'
 import { toast } from 'sonner'
 import { useNavigate } from 'react-router-dom'
+import { API } from '@/utils/constant'
 
-const companyArray = [0, 1, 2];
+// const companyArray = [0, 1, 2];
 
 const PostJobByAdmin = () => {
    const [loading, setLoading] = useState(false);
@@ -44,7 +45,7 @@ const PostJobByAdmin = () => {
 
       try {
          setLoading(true);
-         const res = await axios.post('/api/v1/job/post',inpuData,{
+         const res = await axios.post(`${API}/api/v1/job/post`,inpuData,{
             headers:{
                'Content-Type':'application/json'
             },

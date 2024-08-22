@@ -5,6 +5,7 @@ import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { setAllApplicants } from '@/Redux/applicationSlice'
+import { API } from '@/utils/constant'
 
 const GetAllApplicants = () => {
    const params = useParams();
@@ -13,7 +14,7 @@ const GetAllApplicants = () => {
    useEffect(()=>{
      const fetchAllApplicants = async()=>{
         try {
-           const res = await axios.get(`/api/v1/application/${params.id}/applicants`,{
+           const res = await axios.get(`${API}/api/v1/application/${params.id}/applicants`,{
             withCredentials:true
            })
            

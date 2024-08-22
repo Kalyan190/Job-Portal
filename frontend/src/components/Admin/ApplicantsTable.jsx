@@ -5,13 +5,14 @@ import { MoreHorizontal } from 'lucide-react';
 import { useSelector } from 'react-redux';
 import { toast } from 'sonner';
 import axios from 'axios';
+import { API } from '@/utils/constant';
 
 const shortlisting = ["Accepted", "Rejected"];
 const ApplicantsTable = () => {
    const { applicants } = useSelector(store => store.application);
    const statusHandler = async(status,id)=>{
       try {
-         const res = await axios.post(`/api/v1/application/status/${id}/update`,{status},{withCredentials:true});
+         const res = await axios.post(`${API}/api/v1/application/status/${id}/update`,{status},{withCredentials:true});
 
          if(res.data.success){
             toast.success(res.data.message);

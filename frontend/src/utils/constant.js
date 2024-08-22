@@ -1,1 +1,1 @@
-export const API_END_POINT = "https://job-portal-smoky-two.vercel.app/";
+export const API = import.meta.env.VITE_PUBLIC_URL;

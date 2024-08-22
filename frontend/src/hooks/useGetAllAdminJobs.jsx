@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { toast } from 'sonner'
+import { API } from '@/utils/constant'
 
 
 const useGetAllAdminJobs = () => {
@@ -10,7 +11,7 @@ const useGetAllAdminJobs = () => {
    useEffect(() => {
       const fetchAllAdminJobs = async () => {
          try {
-            const res = await axios.get('/api/v1/job/getadminjobs', { withCredentials: true });
+            const res = await axios.get(`${API}/api/v1/job/getadminjobs`, { withCredentials: true });
             if (res.data.success) {
                dispatch(setAllAdminJobs(res.data.jobs))
             }
