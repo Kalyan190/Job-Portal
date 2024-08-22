@@ -1,1 +1,1 @@
-export const USER_API_END_POINT = "/api/v1/users";
+export const API_END_POINT = "https://job-portal-smoky-two.vercel.app/";
