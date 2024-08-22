@@ -18,8 +18,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser())
 const corsOptions = {
-   origin: 'https://job-portal-p7s6.vercel.app/',
-      credentials: true
+   origin: '*',
+   credentials: true
 }
 app.use(cors(corsOptions))
 
@@ -30,9 +30,9 @@ app.use("/api/v1/users/", userRoute)
 app.use("/api/v1/company/",companyRoute);
 app.use("/api/v1/job/",jobRoute);
 app.use("/api/v1/application/",applicationRoute);
-app.use("/api/home",(req,res)=>{
-      res.json("Hello World")
-;})
+// app.use("/api/home",(req,res)=>{
+//       res.json("Hello World")
+// ;})
 
 
 app.listen(PORT, () => {
