@@ -11,10 +11,10 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      '/api': 'https://job-portal-smoky-two.vercel.app',
+      '/api': 'http://localhost:8000',
     },
   },
 })
 
-
+//https://job-portal-smoky-two.vercel.app/
 
