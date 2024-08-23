@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser())
 
 const corsOptions = {
-   origin: '*',
+   origin: 'https://job-portal-epbf.vercel.app',
    credentials: true
 }
 app.use(cors(corsOptions))
