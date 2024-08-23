@@ -1,4 +1,4 @@
-import express, { response } from "express";
+import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import dotenv from "dotenv"
@@ -17,8 +17,9 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser())
+
 const corsOptions = {
-   origin: `${process.env.BASE_URL}`,
+   origin: `https://job-portal-epbf.vercel.app`,
    credentials: true
 }
 app.use(cors(corsOptions))
@@ -27,19 +28,19 @@ app.use(cors(corsOptions))
 const PORT = process.env.PORT || 3000;
 
 app.use("/api/v1/users/", userRoute)
-app.use("/api/v1/company/",companyRoute);
-app.use("/api/v1/job/",jobRoute);
-app.use("/api/v1/application/",applicationRoute);
+app.use("/api/v1/company/", companyRoute);
+app.use("/api/v1/job/", jobRoute);
+app.use("/api/v1/application/", applicationRoute);
 // app.use("/api/home",(req,res)=>{
 //       res.json("Hello World")
 // ;})
 
 
 app.listen(PORT, () => {
-      connectDb();
-      console.log(`Server running at port ${PORT}`);
-}
-)
+   connectDb();
+   console.log(`Server running at port ${PORT}`);
+   console.log(process.env.BASE_URL);
+})
 
 
 
