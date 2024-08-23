@@ -33,7 +33,8 @@ app.use("/api/v1/job/", jobRoute);
 app.use("/api/v1/application/", applicationRoute);
 app.use("/api/home",(req,res)=>{
       res.json("Hello World")
-;})
+   
+})
 
 
 app.listen(PORT, () => {
