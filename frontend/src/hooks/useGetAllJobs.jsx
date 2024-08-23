@@ -9,6 +9,7 @@ import { API } from '@/utils/constant'
 const useGetAllJobs = () => {
    const dispatch = useDispatch();
    const {searchQuery} = useSelector(store=>store.Job);
+   const {user} = useSelector(store=>store.auth);
    
   
       useEffect(() => {
@@ -20,11 +21,12 @@ const useGetAllJobs = () => {
                }
             } catch (error) {
                console.log(error);
+               console.log("toast error");
                toast.error(error?.response?.data?.message);
             }
          }
          fetchAllJobs();
-      }, [])
+      }, [user])
    
    
 }

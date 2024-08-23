@@ -41,7 +41,6 @@ const Login = () => {
 
          if (res.data.success) {
             dispatch(setUser(res.data.user));
-            console.log(res.data.token);
             
             console.log(res.data.user);
             navigate("/")
@@ -50,6 +49,7 @@ const Login = () => {
       } catch (error) {
          console.log(error);
          toast.error(error.response?.data?.message);
+         console.log("catch error");
       } finally {
          dispatch(setLoading(false));
       }
@@ -58,7 +58,7 @@ const Login = () => {
      if(user){
        navigate('/')
      }
-   },[])
+   },[user])
 
 
    return (
