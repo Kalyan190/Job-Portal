@@ -10,12 +10,22 @@ const useGetAllJobs = () => {
    const dispatch = useDispatch();
    const {searchQuery} = useSelector(store=>store.Job);
    const {user} = useSelector(store=>store.auth);
-   
+    
+   // https://backend-job-lsmb.onrender.com/api/v1/job/get?keyword=
   
       useEffect(() => {
          const fetchAllJobs = async () => {
             try {
-               const res = await axios.get(`${API}/api/v1/job/get?keyword=${searchQuery}`, { withCredentials: true });
+               const res = await axios.get(
+                  `${API}/api/v1/job/get?keyword=${searchQuery}`,
+                  {
+                     headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${user.token}`, // Add the Bearer token here
+                     },
+                     withCredentials: true, // Ensure that cookies are sent with requests
+                  }
+               );
                if (res.data.success) {
                   dispatch(setAllJobs(res.data.jobs))
                }

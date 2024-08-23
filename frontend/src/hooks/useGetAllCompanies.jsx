@@ -11,7 +11,13 @@ const useGetAllCompanies = () => {
    useEffect(() => {
       const fetchAllCompanies = async () => {
          try {
-            const res = await axios.get(`${API}/api/v1/company/get`, { withCredentials: true });
+            const res = await axios.get(`${API}/api/v1/company/get`, {
+               headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${user.token}`, // Add the Bearer token here
+               },
+               withCredentials: true, // Ensure that cookies are sent with requests
+            });
             if (res.data.success) {
                dispatch(setCompanies(res.data.companies))
             }

@@ -89,15 +89,16 @@ export const login = async (req,res)=>{
           const tokenData = {
             userID : user._id
           }
+          
           const token = await jwt.sign(tokenData,process.env.SECRET_KEY,{expiresIn:"1d"})
-
+          
           user = {
              _id: user._id,
             fullname: user.fullname,
             email: user.email,
             phonenumber: user.phonenumber,
             role: user.role,
-            profile:user.profile
+            profile:user.profile,
 
           }
 

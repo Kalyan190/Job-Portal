@@ -43,7 +43,7 @@ export const postJob = async (req,res)=>{
 // students only
 export const getAllJobs = async(req,res)=>{
       try {
-          const keyword = req.query.keyword || "";
+          const keyword = req.query.keyword || "" ;
           const query = {
             $or:[
                   {title:{$regex:keyword,$options:"i"}},
