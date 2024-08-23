@@ -24,7 +24,7 @@ const Signup = () => {
             
 
       });
-      console.log("Api: --> ",API);
+      
       const navigate = useNavigate()
 
       const changeEventHandler = (e)=>{

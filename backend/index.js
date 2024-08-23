@@ -18,10 +18,20 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser())
 
+// const corsOptions = {
+//    origin: 'https://job-portal-epbf.vercel.app',
+//    credentials: true
+// }
+
 const corsOptions = {
-   origin: 'https://job-portal-epbf.vercel.app',
-   credentials: true
-}
+   origin: 'https://job-portal-epbf.vercel.app', // Allow only requests from this origin
+   methods: 'GET,POST,PUT,OPTIONS,DELETE,UPDATE,PATCH', // Allow only these methods
+   // allowedHeaders: ['Content-Type', 'Authorization'] // Allow only these headers
+};
+
+// Use CORS middleware with specified options
+app.use(cors(corsOptions));
+
 app.use(cors(corsOptions))
 
 const PORT = process.env.PORT || 3000;
