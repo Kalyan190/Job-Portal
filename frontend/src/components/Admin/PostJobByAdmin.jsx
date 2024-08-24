@@ -45,11 +45,12 @@ const PostJobByAdmin = () => {
 
       try {
          setLoading(true);
-         const res = await axios.post(`${API}/api/v1/job/post`,inpuData,{
-            headers:{
-               'Content-Type':'application/json'
+         const res = await axios.post(`${API}/api/v1/job/post`, inpuData, {
+            headers: {
+               'Content-Type': 'application/json',
+               'Authorization': `Bearer ${user.token}`, // Add the Bearer token here
             },
-            withCredentials:true
+            withCredentials: true, // Ensure that cookies are sent with requests
          })
 
          if(res.data.success){

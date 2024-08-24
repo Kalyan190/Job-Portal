@@ -50,15 +50,17 @@ const CompanySetup = () => {
       if(input.file){
          formData.append("file", input.file);
       }
-     
+      
       try {
          setLoading(true);
-         const res = await axios.put(`${API}/api/v1/company/update/${params.id}`,formData,{
-            headers:{
-               'Content-Type':'multipart/form-data'
-            },
-            withCredentials:true
-         })
+         const res = await axios.put(`${API}/api/v1/company/update/${params.id}`,formData,
+            {
+               headers: {
+                  'Content-Type': 'multipart/form-data',
+                  'Authorization': `Bearer ${user.token}`, // Add the Bearer token here
+               },
+               withCredentials: true, // Ensure that cookies are sent with requests
+            })
          console.log("data: ",res);
 
          if(res.data.success){

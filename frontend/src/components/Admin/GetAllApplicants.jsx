@@ -14,8 +14,12 @@ const GetAllApplicants = () => {
    useEffect(()=>{
      const fetchAllApplicants = async()=>{
         try {
-           const res = await axios.get(`${API}/api/v1/application/${params.id}/applicants`,{
-            withCredentials:true
+           const res = await axios.get(`${API}/api/v1/application/${params.id}/applicants`, {
+              headers: {
+                 'Content-Type': 'application/json',
+                 'Authorization': `Bearer ${user.token}`, // Add the Bearer token here
+              },
+              withCredentials: true, // Ensure that cookies are sent with requests
            })
            
            if(res.data.success){

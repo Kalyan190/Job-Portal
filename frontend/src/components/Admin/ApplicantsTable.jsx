@@ -12,7 +12,13 @@ const ApplicantsTable = () => {
    const { applicants } = useSelector(store => store.application);
    const statusHandler = async(status,id)=>{
       try {
-         const res = await axios.post(`${API}/api/v1/application/status/${id}/update`,{status},{withCredentials:true});
+         const res = await axios.post(`${API}/api/v1/application/status/${id}/update`, { status }, {
+            headers: {
+               'Content-Type': 'application/json',
+               'Authorization': `Bearer ${user.token}`, // Add the Bearer token here
+            },
+            withCredentials: true, // Ensure that cookies are sent with requests
+         });
 
          if(res.data.success){
             toast.success(res.data.message);
