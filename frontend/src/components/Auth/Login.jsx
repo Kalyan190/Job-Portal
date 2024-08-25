@@ -42,15 +42,12 @@ const Login = () => {
 
          if (res.data.success) {
             dispatch(setUser(res.data.user));
-            
-            console.log(res.data.user);
             navigate("/")
             toast.success(res.data.message);
          }
       } catch (error) {
          console.log(error);
          toast.error(error.response?.data?.message);
-         console.log("catch error");
       } finally {
          dispatch(setLoading(false));
       }

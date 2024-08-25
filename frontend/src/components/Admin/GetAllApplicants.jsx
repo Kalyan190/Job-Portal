@@ -11,6 +11,8 @@ const GetAllApplicants = () => {
    const params = useParams();
    const dispatch = useDispatch();
    const {applicants} = useSelector(store=>store.application);
+   const {user} = useSelector(store=>store.auth);
+
    useEffect(()=>{
      const fetchAllApplicants = async()=>{
         try {
@@ -30,7 +32,7 @@ const GetAllApplicants = () => {
         }
      }
      fetchAllApplicants();
-   },[])  
+   }, [dispatch, params.id, user])  
 
    return (
       <div>

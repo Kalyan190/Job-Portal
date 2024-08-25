@@ -23,7 +23,7 @@ const CompaniesTable = () => {
       setFilterCompanies(filterCompany)
 
    }, [companies, searchCompanyByText]);
-   console.log(filterCompanies);
+ 
    return (
       <div>
          <Table>

@@ -26,6 +26,8 @@ const PostJobByAdmin = () => {
       position: 0,
       companyId: ""
    })
+   const {user} = useSelector(store=>store.auth);
+   
    const eventHandler = (e) => {
       setinputData({ ...inpuData, [e.target.name]: e.target.value });
    }
@@ -39,7 +41,7 @@ const PostJobByAdmin = () => {
    
    const submitHandler = async(e)=>{
       e.preventDefault();
-      console.log("formData : ",inpuData);
+      // console.log("formData : ",inpuData);
    //   const formData = new FormData();
    //   formData.append('title',inpuData.title);
 

@@ -1,13 +1,15 @@
 import { setAllAdminJobs} from '@/Redux/jobSlice'
 import axios from 'axios'
 import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'sonner'
 import { API } from '@/utils/constant'
 
 
 const useGetAllAdminJobs = () => {
    const dispatch = useDispatch();
+   const {user} = useSelector(store=>store.auth);
+   
    useEffect(() => {
       const fetchAllAdminJobs = async () => {
          try {
