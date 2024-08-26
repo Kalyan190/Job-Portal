@@ -13,7 +13,7 @@ const useGetAllJobs = () => {
    useEffect(() => {
       const fetchAllJobs = async () => {
          if (!user || !user.token) {
-            toast.error("User is not authenticated");
+            // toast.error("User is not authenticated");
             return;
          }
 

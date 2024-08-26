@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Navbar from '../Shared/Navbar'
 import { Label } from '../ui/label'
 import { Input } from '../ui/input'
-import { Loader2 } from 'lucide-react'
+import { Loader2, MoveLeft } from 'lucide-react'
 import { Button } from '../ui/button'
 import { useSelector } from 'react-redux'
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
@@ -45,6 +45,11 @@ const PostJobByAdmin = () => {
    //   const formData = new FormData();
    //   formData.append('title',inpuData.title);
 
+      if (!inpuData.title || !inpuData.description || !inpuData.requirements || !inpuData.salary || !inpuData.location || !inpuData.jobType || !inpuData.position || !inpuData.companyId){
+         toast.error("All fields are required.");
+         return;
+      }
+
       try {
          setLoading(true);
          const res = await axios.post(`${API}/api/v1/job/post`, inpuData, {
@@ -74,7 +79,11 @@ const PostJobByAdmin = () => {
       <div>
          <Navbar />
          <div className='flex items-center justify-center w-screen my-5'>
-            <form className='p-8 max-w-4xl border border-gray-200 shadow-lg rounded-md' onSubmit={submitHandler} >
+      
+            <form className='px-8 max-w-4xl border border-gray-200 shadow-lg rounded-md' onSubmit={submitHandler} >
+               <Button className="flex items-center gap-2 justify-center my-2" onClick={()=>navigate('/admin/jobs')}>
+                  <MoveLeft className='w-4' /> <span>Back</span>
+               </Button>
                <div className='grid grid-cols-2 gap-2'>
                   <div>
                      <Label>Title</Label>

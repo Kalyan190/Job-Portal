@@ -21,6 +21,10 @@ const CompanyCreate = () => {
       if (!user || !user.token) {
          return;
       }
+      if(!companyName){
+         toast.error("Company name is required.");
+         return;
+      }
 
       setIsLoading(true); // Start loading
       try {

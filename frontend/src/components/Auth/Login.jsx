@@ -29,6 +29,10 @@ const Login = () => {
 
    const submitHandler = async (e) => {
       e.preventDefault();
+      if ( !input.email || !input.password || !input.role) {
+         toast.error("All fields are required.");
+         return;
+      }
 
       try {
          dispatch(setLoading(true));

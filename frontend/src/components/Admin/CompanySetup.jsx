@@ -39,6 +39,12 @@ const CompanySetup = () => {
 
    const submitHandler = async (e) => {
       e.preventDefault();
+      if (!input.name || !input.description || !input.website || !input.location || !input.file) {
+         toast.error("All fields are required.");
+         return;
+      }
+
+
       const formData = new FormData();
 
       formData.append("name", input.name);
