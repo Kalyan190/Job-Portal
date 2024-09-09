@@ -1,3 +1,4 @@
+// AdminJobsTable.jsx
 import React, { useEffect, useState } from 'react';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '../ui/table';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
@@ -5,45 +6,52 @@ import { Delete, Edit2, Eye, MoreHorizontal } from 'lucide-react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { toast } from 'sonner'; // Assuming you're using `sonner` for toast notifications
-import { API } from '@/utils/constant'; // Make sure API is correctly set
+import { toast } from 'sonner';
+import { API } from '@/utils/constant';
+import useGetAppliedJob from '@/hooks/useGetAppliedJob';
 
 const AdminJobsTable = () => {
-   const { allAdminJobs, searchTextByAdminJobs } = useSelector(store => store.Job);
-   const {user}= useSelector(store=>store.auth);
+   const { allAdminJobs, searchTextByAdminJobs } = useSelector((store) => store.Job);
+   const { user } = useSelector((store) => store.auth);
    const navigate = useNavigate();
+   const [refetch, setRefetch] = useState(false); // State to trigger refetch
+
+   // Use the custom hook to fetch applied jobs with a refetch dependency
+   const refetchJobs = useGetAppliedJob(refetch);
 
    const [filterAdminJobs, setFilterAdminJobs] = useState(allAdminJobs);
 
    useEffect(() => {
-      const filterAdminJobs = allAdminJobs.filter((jobs) => {
+      const filterJobs = allAdminJobs.filter((jobs) => {
          if (!searchTextByAdminJobs) {
             return true;
          }
-         return jobs?.title?.toLowerCase().includes(searchTextByAdminJobs.toLowerCase()) || jobs?.company?.name.toLowerCase().includes(searchTextByAdminJobs.toLowerCase());
+         return (
+            jobs?.title?.toLowerCase().includes(searchTextByAdminJobs.toLowerCase()) ||
+            jobs?.company?.name.toLowerCase().includes(searchTextByAdminJobs.toLowerCase())
+         );
       });
 
-      setFilterAdminJobs(filterAdminJobs);
+      setFilterAdminJobs(filterJobs);
    }, [allAdminJobs, searchTextByAdminJobs]);
 
    const deleteHandler = async (jobId) => {
       try {
-         // Confirm before deleting
          if (!window.confirm('Are you sure you want to delete this job?')) return;
 
-         // Send DELETE request to the backend
          const response = await axios.delete(`${API}/api/v1/job/delete/${jobId}`, {
             headers: {
-               'Authorization': `Bearer ${user.token}`, // Make sure the user token is correctly set
+               Authorization: `Bearer ${user.token}`,
             },
-            withCredentials:true
+            withCredentials: true,
          });
 
          if (response.data.success) {
             toast.success(response.data.message || 'Job deleted successfully.');
+            setFilterAdminJobs((prevJobs) => prevJobs.filter((job) => job._id !== jobId));
 
-            // Update the state to remove the deleted job from the list
-            setFilterAdminJobs(filterAdminJobs.filter((job) => job._id !== jobId));
+            // Trigger refetch after deleting a job
+            setRefetch((prev) => !prev);
          } else {
             toast.error(response.data.message || 'Failed to delete the job.');
          }

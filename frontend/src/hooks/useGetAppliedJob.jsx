@@ -1,13 +1,15 @@
+// useGetAppliedJob.jsx
 import { setAllAppliedJobs } from '@/Redux/jobSlice';
 import axios from 'axios';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'sonner';
 import { API } from '@/utils/constant';
 
-const useGetAppliedJob = () => {
+const useGetAppliedJob = (refetch) => {
    const dispatch = useDispatch();
-   const { user } = useSelector(store => store.auth);
+   const { user } = useSelector((store) => store.auth);
+   const [trigger, setTrigger] = useState(false); // State to control refetching
 
    useEffect(() => {
       const fetchAppliedJobs = async () => {
@@ -34,10 +36,14 @@ const useGetAppliedJob = () => {
          }
       };
 
+      // Fetch when the component mounts and when `refetch` changes
       fetchAppliedJobs();
-   }, [user, dispatch]);
+   }, [user, dispatch, trigger, refetch]); // added `refetch` and `trigger` as dependencies
 
-   return null;
+   // Function to trigger refetch
+   const refetchJobs = () => setTrigger(!trigger);
+
+   return refetchJobs;
 };
 
 export default useGetAppliedJob;

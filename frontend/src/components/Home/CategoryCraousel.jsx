@@ -25,12 +25,12 @@ const CategoryCraousel = () => {
       navigate('/browse');
    }
       return (
-            <div>
-                  <Carousel className="w-full max-w-xl mx-auto my-16">
-                        <CarouselContent>
+            <div className='m-2 flex items-center justify-center'>
+                  <Carousel className=" my-16 max-sm:w-[50%] md:w-[80%] mx-auto sm:max-w-xs md:max-w-xl ">
+                        <CarouselContent className="">
                         {
                               category.map((cat,index)=>(
-                                    <CarouselItem className="md:basis-1/2 lg:basis-1/3" key={index}>
+                                 <CarouselItem className="md:basis-1/2 lg:basis-1/3 flex items-center justify-center " key={index}>
                                    <Button onClick={()=>searchJobHandler(cat)} className="rounded-full" variant="outline">{cat}</Button>
                                     </CarouselItem>
                               ))
