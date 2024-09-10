@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setLoading } from '@/Redux/authSlice'
 import { Loader2 } from 'lucide-react'
 import { API } from '@/utils/constant'
+import Footer from '../Home/Footer'
 
 const Signup = () => {
    const [input, setInput] = useState({
@@ -84,8 +85,8 @@ const Signup = () => {
    return (
       <div>
          <Navbar />
-         <div className='flex items-center justify-center max-w-7xl mx-auto'>
-            <form onSubmit={submitHandler} className='w-1/2 border border-gray-200 rounded-md p-4 my-10'>
+         <div className='flex items-center justify-center sm:max-w-7xl sm:mx-auto p-3'>
+            <form onSubmit={submitHandler} className='sm:w-1/2 border border-gray-200 rounded-md p-4 my-10'>
                <h1 className='font-bold text-xl mb-5'>Sign Up</h1>
                <div className='my-2'>
                   <Label>Full Name</Label>
@@ -103,15 +104,19 @@ const Signup = () => {
                   <Label>Password</Label>
                   <Input type="password" placeholder="Password" autoComplete="false" name="password" onChange={changeEventHandler} value={input.password} />
                </div>
-               <div className='flex items-center justify-between py-1'>
+               <div className='flex items-right justify-between py-1 flex-col md:flex-row'>
                   <RadioGroup className="flex gap-4 items-center">
                      <div className="flex items-center space-x-2">
-                        <Input type="radio" name="role" value="Student" checked={input.role === 'Student'} onChange={changeEventHandler} className="cursor-pointer" />
-                        <Label>Student</Label>
+                        
+                        <Label className='flex items-center gap-2 cursor-pointer'>
+                           <Input type="radio" name="role" value="Student" checked={input.role === 'Student'} onChange={changeEventHandler} className="cursor-pointer" />
+                        Student</Label>
                      </div>
                      <div className="flex items-center space-x-2">
-                        <Input type="radio" name="role" value="Recruiter" checked={input.role === 'Recruiter'} onChange={changeEventHandler} className="cursor-pointer" />
-                        <Label>Recruiter</Label>
+                        
+                        <Label className='flex items-center gap-2 cursor-pointer'>
+                           <Input type="radio" name="role" value="Recruiter" checked={input.role === 'Recruiter'} onChange={changeEventHandler} className="cursor-pointer" />
+                        Recruiter</Label>
                      </div>
                   </RadioGroup>
                   <div className='flex items-center my-2 gap-2'>
@@ -125,6 +130,7 @@ const Signup = () => {
                <span className='text-sm'>Already have an account ? <Link to='/login' className='text-blue-600'>Login</Link></span>
             </form>
          </div>
+         <Footer/>
       </div>
    )
 }

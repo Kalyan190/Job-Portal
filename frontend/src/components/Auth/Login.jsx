@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setLoading, setUser } from '@/Redux/authSlice'
 import { Loader2 } from 'lucide-react'
 import { API } from '@/utils/constant'
+import Footer from '../Home/Footer'
 
 const Login = () => {
    const [input, setInput] = useState({
@@ -67,7 +68,7 @@ const Login = () => {
       <div>
          <Navbar />
          <div className='flex items-center justify-center max-w-7xl mx-auto'>
-            <form onSubmit={submitHandler} className='w-1/2 border border-gray-200 rounded-md p-4 my-10'>
+            <form onSubmit={submitHandler} className='sm:w-1/2 border border-gray-200 rounded-md p-4 my-10'>
                <h1 className='font-bold text-xl mb-5'>Login</h1>
 
                <div className='my-2'>
@@ -82,12 +83,17 @@ const Login = () => {
                <div className='flex items-center justify-between py-1'>
                   <RadioGroup className="flex gap-4 items-center">
                      <div className="flex items-center space-x-2">
-                        <Input type="radio" name="role" value="Student" checked={input.role === 'Student'} onChange={changeEventHandler} className="cursor-pointer" />
-                        <Label>Student</Label>
+                        
+                        <Label className='flex items-center gap-2 cursor-pointer'>
+                           <Input type="radio" name="role" value="Student" checked={input.role === 'Student'} onChange={changeEventHandler} className="cursor-pointer w-4" />
+                        Student</Label>
                      </div>
                      <div className="flex items-center space-x-2">
-                        <Input type="radio" name="role" value="Recruiter" checked={input.role === 'Recruiter'} onChange={changeEventHandler} className="cursor-pointer" />
-                        <Label>Recruiter</Label>
+                        
+                        <Label className='flex items-center gap-2 cursor-pointer'>
+                           <Input type="radio" name="role" value="Recruiter" checked={input.role === 'Recruiter'} onChange={changeEventHandler} className="cursor-pointer w-4" />
+                        Recruiter 
+                        </Label>
                      </div>
 
                   </RadioGroup>
@@ -101,6 +107,7 @@ const Login = () => {
 
             </form>
          </div>
+         <Footer/>
       </div>
    )
 }

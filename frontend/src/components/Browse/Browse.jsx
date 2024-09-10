@@ -20,9 +20,9 @@ const Browse = () => {
    return (
       <div>
          <Navbar />
-         <div className='max-w-7xl mx-auto my-10 px-24 '>
+         <div className='max-w-7xl mx-auto my-10 flex flex-col items-center justify-center '>
             <h1 className='font-bold text-xl my-6'>Search Result ({allJobs.length})</h1>
-            <div className='grid grid-cols-3 gap-4'>
+            <div className='md:grid max-md:grid-cols-2 max-sm:grid-cols-2 max-lg:grid-cols-2 max-xl:grid-cols-3 max-2xl:grid-cols-3 lg:gap-8 md:gap-10 gap-8 py-5 flex items-center justify-center flex-col'>
                {
                   allJobs.length <=0 ? (<span>No Jobs</span>) : allJobs.map((job) => {
                      return (

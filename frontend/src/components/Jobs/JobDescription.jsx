@@ -82,11 +82,11 @@ const JobDescription = () => {
          <Navbar />
          {
             isloading ? <span className='flex items-center justify-center max-w-5xl mx-auto mt-5 min-h-[65vh] text-blue-500'><FadeLoader color='#7209b7' /></span> : (
-               <div className={`max-w-5xl mx-auto mt-5 min-h-[65vh]`}>
-                  <div className='flex items-center justify-between'>
+               <div className={`max-w-5xl mx-auto mt-5 min-h-[65vh] px-4`}>
+                  <div className='flex items-center justify-between flex-wrap gap-4'>
                      <div>
                         <h1 className='font-bold text-xl'>{singleJob?.title}</h1>
-                        <div className='flex items-center gap-2 mt-4'>
+                        <div className='flex items-center gap-2 mt-4 flex-wrap'>
                            <Badge className="font-bold text-blue-600" variant="ghost">{singleJob?.position} Positions</Badge>
                            <Badge className="font-bold text-[#F83002]" variant="ghost">{singleJob?.jobType}</Badge>
                            <Badge className="font-bold text-[#7209b7]" variant="ghost">{singleJob?.salary} Lpa</Badge>
@@ -124,8 +124,9 @@ const JobDescription = () => {
             )
          }
          
-         <Footer />
+        
       </div>
+      
    );
 };
 
