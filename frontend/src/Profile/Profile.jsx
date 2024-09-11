@@ -24,16 +24,16 @@ const Profile = () => {
    return (
       <div>
          <Navbar />
-         <div className='max-w-5xl mx-auto my-5 p-8 bg-white border border-gray-200 rounded-2xl'>
+         <div className='max-w-5xl mx-auto my-5 max-lg:mx-4 p-8 bg-white border border-gray-200 rounded-2xl '>
             <div className='flex gap-4 justify-between items-center'>
-               <div className='flex gap-4 items-center'>
-                  <Avatar className='cursor-pointer h-24 w-24'>
+               <div className='flex gap-4 items-center flex-wrap'>
+                  <Avatar className='cursor-pointer md:h-24 md:w-24'>
                      <AvatarImage src={user?.profile?.profilePhoto} alt="@shadcn" />
                   </Avatar>
 
                   <div>
                      <h1 className='text-xl font-medium'>{user?.fullname}</h1>
-                     <p>{user?.profile?.bio}</p>
+                     <p className='w-max'>{user?.profile?.bio}</p>
                   </div>
 
                </div>
@@ -47,7 +47,7 @@ const Profile = () => {
             </div>
             <div className='my-5'>
                <h1>Skills</h1>
-               <div className='flex gap-2 items-center mt-2'>
+               <div className='flex gap-2 items-center mt-2 flex-wrap'>
                   {
                      user?.profile?.skills?.lengtth !== 0 ? user?.profile?.skills.map((item, index) => <Badge key={index}>{item}</Badge>) : <span>NA</span>
                   }
@@ -64,7 +64,7 @@ const Profile = () => {
 
 
          </div>
-         <div className='max-w-5xl bg-white rounded-2xl mx-auto'>
+         <div className='max-w-5xl bg-white rounded-2xl mx-auto max-lg:mx-5'>
             <h1 className='font-bold text-lg '>Applied Jobs</h1>
             <AppliedJobTable />
          </div>

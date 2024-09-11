@@ -22,10 +22,10 @@ const AdminJobs = () => {
    return (
       <div>
          <Navbar />
-         <div className='max-w-6xl mx-auto my-10'>
+         <div className='max-w-6xl mx-auto my-10 max-lg:mx-4'>
             <div className='flex items-center justify-between my-5'>
-               <Input className="w-fit " placeholder="Filter by name or role" onChange={(e) => setInput(e.target.value)} />
-               <Button onClick={() => navigate('/admin/jobs/create')}  >Post New Jobs</Button>
+               <Input className="w-fit max-md:w-36 " placeholder="Filter by name or role" onChange={(e) => setInput(e.target.value)} />
+               <Button onClick={() => navigate('/admin/jobs/create')} className='max-md:w-28' >Post New Jobs</Button>
             </div>
             <AdminJobsTable/>
          </div>

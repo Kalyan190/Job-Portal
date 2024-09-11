@@ -104,7 +104,7 @@ const Navbar = () => {
                   </button>
                </div>
                <div
-                  className={`flex-col md:flex-row font-medium items-center gap-5 absolute md:static bg-white left-0 top-16 w-full md:w-auto md:flex ${isMenuOpen ? 'flex' : 'hidden'} max-md:bg-gray-200 p-6`}
+                  className={`flex-col md:flex-row font-medium items-center gap-5 absolute md:static bg-white left-0 top-16 w-full md:w-auto md:flex ${isMenuOpen ? 'flex' : 'hidden'} max-md:bg-gray-200 p-6 z-10`}
                >
                   <ul className="md:flex-row w-full flex flex-col items-center gap-2 justify-center">
                      {user && user.role === "Recruiter" ? (
