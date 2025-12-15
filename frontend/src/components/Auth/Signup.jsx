@@ -124,10 +124,12 @@ const Signup = () => {
                      <Input accept='image/*' type="file" onChange={changeFileHandler} className="cursor-pointer" />
                   </div>
                </div>
-               {
-                  loading ? <Button className="w-full my-4"><Loader2 className='mr-2 h-4 w-4 animate-spin' />Please wait..</Button> : <Button type="submit" className="w-full my-4">Signup</Button>
-               }
-               <span className='text-sm'>Already have an account ? <Link to='/login' className='text-blue-600'>Login</Link></span>
+               <div className='flex flex-col'>
+                  {
+                     loading ? <Button className="w-full my-4 px-4 max-sm:w-max"><Loader2 className='mr-2 h-4 w-4 animate-spin' />Please wait..</Button> : <Button type="submit" className="w-full my-4 px-4 max-sm:w-max">Signup</Button>
+                  }
+                  <span className='text-sm'>Already have an account ? <Link to='/login' className='text-blue-600'>Login</Link></span>
+               </div>
             </form>
          </div>
          <Footer/>

@@ -99,11 +99,13 @@ const Login = () => {
                   </RadioGroup>
 
                </div>
-               {
-                  loading ? <Button className="w-full my-4"><Loader2 className='mr-2 h-4 w-4 animate-spin' />Please wait..</Button> : <Button type="submit" className="w-full my-4">Login</Button>
-               }
+              <div className='flex flex-col'>
+                  {
+                     loading ? <Button className="sm:w-full my-4 px-4 max-sm:w-max"><Loader2 className='mr-2 h-4 w-4 animate-spin' />Please wait..</Button> : <Button type="submit" className="w-full my-4 px-4 max-sm:w-max">Login</Button>
+                  }
 
-               <span className='text-sm'>Don't have an account ? <Link to='/signup' className='text-blue-600'>Sign Up</Link></span>
+                  <span className='text-sm'>Don't have an account ? <Link to='/signup' className='text-blue-600'>Sign Up</Link></span>
+              </div>
 
             </form>
          </div>

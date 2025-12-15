@@ -33,14 +33,17 @@ const UpdateDialogProfile = ({ open, setOpen }) => {
       setInputData({ ...inputData, file });
    };
 
+   
+
    const submitHandler = async (e) => {
       e.preventDefault();
+
 
       if (!inputData.fullname || !inputData.email || !inputData.phonenumber || !inputData.bio || !inputData.skills || !inputData.file) {
          toast.error("All fields are required.");
          return;
       }
-
+      
       const formData = new FormData();
       formData.append("fullname", inputData.fullname);
       formData.append("email", inputData.email);
